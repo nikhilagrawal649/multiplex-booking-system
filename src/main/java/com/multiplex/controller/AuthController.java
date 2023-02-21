@@ -49,7 +49,7 @@ public class AuthController {
                 cookie.setHttpOnly(true);
                 cookie.setPath("/"); // Global
                 response.addCookie(cookie);
-                return ResponseEntity.ok(new LoginResponse(request.getUsername(), jwt));
+                return ResponseEntity.ok(new LoginResponse(request.getUsername(), jwt,"Login Successfull."));
             }
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
