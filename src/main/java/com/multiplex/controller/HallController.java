@@ -55,10 +55,10 @@ public class HallController {
 //	@SecurityRequirement(name = "Bearer Authentication")
 //	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/api/halls/{hallId}")
-	public void deletehall(@PathVariable Integer hallId) {
+	public String deletehall(@PathVariable Integer hallId) {
 		hallservce.deleteHall(hallId);
 		if(hallId!=null) {
-			return;
+			return "Sucessfully Deleted" ;
 		}else {
 			throw new HallException();
 		}

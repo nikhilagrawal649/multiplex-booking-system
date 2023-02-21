@@ -1,13 +1,14 @@
 package com.multiplex.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class HallDTO {
 	@NotNull(message="Id required")
 	private Integer hallId;
-	//@NotEmpty(message="hallDesc required")
+	@NotEmpty(message="hallDesc required")
 	private String hallDesc;
-	//@NotBlank(message="totalCapacity required")
+	@NotNull(message="totalCapacity required")
 	private Integer totalCapacity;
 
 	public Integer getHallId() {

@@ -3,6 +3,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.multiplex.dao.ShowsRepository;
+import com.multiplex.entity.Hall;
 import com.multiplex.entity.Shows;
 import com.multiplex.exception.ShowException;
 import com.multiplex.service.ShowService;
@@ -34,4 +35,11 @@ public class ShowServiceImpl implements ShowService {
 		showsrepositary.deleteById(showId);
 		return "Show deleted";
 	}
+	
+
+	@Override
+	public Shows updatedShow (Shows updatedShow) {
+		return showsrepositary.save(updatedShow);
+	}
+		
 }

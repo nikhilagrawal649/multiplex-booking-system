@@ -32,7 +32,7 @@ HallRepository hallrepositary;
 	@Override 
 	public String deleteHall(Integer hallId) {
 		hallrepositary.deleteById(hallId);
-		return "deleted";
+		return "Hall deleted";
 	}
 	
 	

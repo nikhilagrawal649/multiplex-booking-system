@@ -1,5 +1,6 @@
 package com.multiplex.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class HallCapacityController {
 	@Autowired
 	HallCapacityService hallCapacityservice;
@@ -36,7 +37,8 @@ public class HallCapacityController {
 
 	@SecurityRequirement(name = "Bearer Authentication")
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-	@PostMapping("/api/HallCapacities")
+	//below method is used for adding data by admin
+	@PostMapping("/HallCapacities")
 	public String addHallCapacity(@RequestBody @Valid HallCapacityDTO hallcapa) throws SeatCountNotZeroException {
 
 		HallCapacity hallCapacity = new HallCapacity();
@@ -60,7 +62,8 @@ public class HallCapacityController {
 
     @SecurityRequirement(name = "Bearer Authentication")
 	@PreAuthorize(value = "hasRole('ROLE_USER')")
-	@GetMapping("/api/HallCapacities")
+    //below method is used for fetching data by user 
+	@GetMapping("/HallCapacities")
 	public List<HallCapacity> getAllHallCapacity() {
 		List<HallCapacity> hallCapacity = hallCapacityservice.getAllHallCapacity();
 		if (hallCapacity != null) {
@@ -72,24 +75,29 @@ public class HallCapacityController {
 
     @SecurityRequirement(name = "Bearer Authentication")
 	@PreAuthorize(value = "hasRole('ROLE_USER')")
-	@GetMapping("/api/HallCapacities/{id}")
+    //below method is used for fetching data by id
+	@GetMapping("/HallCapacities/{id}")
 	public HallCapacity getHallCapacityById(@PathVariable("id") int id) {
 		return hallCapacityservice.getHallCapacityById(id);
 	}
 
     @SecurityRequirement(name = "Bearer Authentication")
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-	@PutMapping("/api/HallCapacities")
+    //below method is used to update the data
+	@PutMapping("/HallCapacities")
 	public HallCapacity updateHallCapacity(@RequestBody HallCapacity updatedHallCapacity) {
 		return hallCapacityservice.updatedHallCapacity(updatedHallCapacity);
 	}
 
     @SecurityRequirement(name = "Bearer Authentication")
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-	@DeleteMapping("/api/HallCapacities/{hallCapacityId}")
+    //below method is used to delete data by id 
+	@DeleteMapping("/HallCapacities/{hallCapacityId}")
 	public String deleteHallCapacity(@PathVariable Integer hallCapacityId) {
 		hallCapacityservice.deleteHallCapacity(hallCapacityId);
 		return "Successfully deleted";
 	}
 
 }
+
+

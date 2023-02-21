@@ -12,6 +12,7 @@ import com.multiplex.exception.HallCapacityException;
 import com.multiplex.exception.HallException;
 import com.multiplex.exception.PasswordNotMatchException;
 import com.multiplex.exception.SeatCountNotZeroException;
+import com.multiplex.exception.SeatTypeNotFoundException;
 import com.multiplex.exception.ShowException;
 import com.multiplex.exception.WrongCredentialsException;
 
@@ -60,5 +61,15 @@ public class GlobalHandler extends Exception {
 	public ResponseEntity<Object> handleHallException(HallException exception) {
 		return new ResponseEntity<>(Constants.HALL_ID_NOT_FOUND, HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleMethodArgumentNotValidException(Exception exception) {
+		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(SeatTypeNotFoundException.class)
+	public ResponseEntity<Object> handleSeatTypeNotFoundException(SeatTypeNotFoundException exception) 
+	{
+		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	
 
 }

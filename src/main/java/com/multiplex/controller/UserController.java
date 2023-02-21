@@ -22,6 +22,7 @@ import com.multiplex.exception.WrongCredentialsException;
 import com.multiplex.service.UserService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
@@ -32,7 +33,7 @@ public class UserController {
 
 	@CrossOrigin
 	@PostMapping("/usersregistration")
-	public User registerUser(@RequestBody UsersDTO userDto)
+	public User registerUser(@RequestBody @Valid UsersDTO userDto)
 			throws EmailAlreadyExistException, PasswordNotMatchException, EmailIdFormatException {
 		String tempEmailId = userDto.getEmailId();
 		if (tempEmailId != null && !"".equals(tempEmailId)) {
