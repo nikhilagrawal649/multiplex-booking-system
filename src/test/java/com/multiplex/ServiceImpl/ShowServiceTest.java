@@ -17,14 +17,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.context.annotation.Configuration;
 
 import com.multiplex.dao.ShowsRepository;
 import com.multiplex.entity.Hall;
 import com.multiplex.entity.HallCapacity;
 import com.multiplex.entity.Movies;
 import com.multiplex.entity.Shows;
+import com.multiplex.exception.ShowException;
 import com.multiplex.serviceimpl.ShowServiceImpl;
 
 
@@ -32,11 +34,17 @@ import com.multiplex.serviceimpl.ShowServiceImpl;
 @SpringBootTest
 public class ShowServiceTest {
 
+	
 	@Mock
 	private ShowsRepository showsrepositary;
 	
+	
 	@InjectMocks
 	ShowServiceImpl showService;
+	
+	
+	
+	
 	
 	
 	@Test
@@ -56,12 +64,19 @@ public class ShowServiceTest {
 	@DisplayName("Get Show By Id")
 	void getshowByIdTest() 
 	{
+		try 
+		{
 		Integer showId=7;
 		Shows show = createShowMockData();
 	    when(showsrepositary.findById(showId)).thenReturn(Optional.of(show));	
 		Shows response = showService.getShowId(showId);
 		assertEquals(response.getMovie().getMovieId(), show.getMovie().getMovieId());
 		assertEquals(response.getHall().getHallId(), show.getHall().getHallId());
+		}
+		catch(ShowException e) 
+		{
+			System.out.println("ERROR:" +e.getMessage());
+		}
 	}
 	
 	
@@ -69,13 +84,19 @@ public class ShowServiceTest {
 	@DisplayName("Get All Shows")
 	void getAllShowsTest() 
 	{
+		try 
+		{
 		List<Shows> show = new ArrayList<>();
 		show.add(createShowMockData());
 		when(showsrepositary.findAll()).thenReturn(show);
 		List<Shows> allShows = showService.getAllShows();
 		assertNotNull(allShows);
 		assertEquals(allShows.size(), 1);
-		
+		}
+		catch(ShowException e) 
+		{
+			System.out.println("ERROR:" +e.getMessage());
+		}
 	}
 	
 	

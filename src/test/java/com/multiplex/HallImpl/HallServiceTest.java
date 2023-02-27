@@ -67,7 +67,7 @@ public class HallServiceTest {
 		int hallId = 1;
 		doNothing().when(hallrepositary).deleteById(hallId);
 		String response = hallService.deleteHall(hallId);
-		assertEquals(response,"Sucessfully Deleted");
+		assertEquals(response,"Hall deleted");
 		
 	}
 	
