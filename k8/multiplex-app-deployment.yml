@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multiplex-app-deployment
+  labels:
+    app: multiplex-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: multiplex-app
+  template:
+    metadata:
+      labels:
+        app: multiplex-app
+    spec:
+      containers:
+      - name: multiplex-app
+        image: nikhil6499/multiplex-booking-system:0.2
+        ports:
+        - containerPort: 8080

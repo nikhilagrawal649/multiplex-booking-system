@@ -53,6 +53,11 @@ public class UserController {
 
 	@Autowired
     private JwtUtils jwtUtils;
+	
+	@GetMapping("/home")
+	public String home() {
+		return "I am inside home.";
+	}
 
 	@CrossOrigin
 	@PostMapping("/usersregistration")
